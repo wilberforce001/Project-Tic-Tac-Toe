@@ -5,8 +5,8 @@ form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     // Initialize user form data
-    const formData = new FormData();
-    const data = object.fromEntries(formData);
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
     document.querySelector(".modal-wrapper").setAttribute("hidden", true);
     console.log(data);
 })
