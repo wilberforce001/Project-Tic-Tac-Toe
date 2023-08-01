@@ -1,3 +1,14 @@
+const winningConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+];
+
 const form = document.querySelector("#myForm");
 
 form.addEventListener("submit", (event) => {
@@ -39,7 +50,7 @@ const InitializeGame = (data) => {
 
 const playMove = (box, data) => {
     // Is game over? If game over, do not do anything
-    if (data.gameOver) {
+    if (data.gameOver || data.round > 8) {
         return;
     }
     // Check if game box has a letter in it, if so, don't do anything 
@@ -51,5 +62,16 @@ const playMove = (box, data) => {
     data.board[box.id] = data.curentPlayer;
     box.textContent = data.currentPlayer;
     box.classList.add(data.currentPlayer === "X" ? "player1" : "player2");
+    // Increse the round number 
+    data.round++;
     console.log(box, data);
+
+    //Check end condtions 
+    if(endConditions(data)) {
+        // Adjust DOM to reflect endConditions
+    }
+};
+
+const endConditions = (data) => {
+
 }
