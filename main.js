@@ -50,7 +50,6 @@ const playMove = (box, data) => {
     // Adjust the DOM for player move, and then check win conditions
     data.board[box.id] = data.curentPlayer;
     box.textContent = data.currentPlayer;
-    box.className = data.currentPlayer === "X" ? "box player1" : "box player2";
-
+    box.classList.add(data.currentPlayer === "X" ? "player1" : "player2");
     console.log(box, data);
 }
