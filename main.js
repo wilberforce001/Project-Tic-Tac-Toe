@@ -13,11 +13,11 @@ form.addEventListener("submit", (event) => {
 
 const InitializeVariables = (data) => {
     data.choice = +data.choice;
-    data.board = [0, 1, 2, 3, 4, 5, , 7, 8];
+    data.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     data.player1 = "X"
     data.player2 = "O"
     data.round = 0;
-    data.curentPlayer = "X";
+    data.currentPlayer = "X";
     data.gameOver = false;
 }
 
@@ -38,5 +38,19 @@ const InitializeGame = (data) => {
 }
 
 const playMove = (box, data) => {
+    // Is game over? If game over, do not do anything
+    if (data.gameOver) {
+        return;
+    }
+    // Check if game box has a letter in it, if so, don't do anything 
+    if (data.board[box.id] === "X" || data.board[box.id] === "O") {
+        return;
+    }
+
+    // Adjust the DOM for player move, and then check win conditions
+    data.board[box.id] = data.curentPlayer;
+    box.textContent = data.currentPlayer;
+    box.className = data.currentPlayer === "X" ? "box player1" : "box player2";
+
     console.log(box, data);
 }
