@@ -14,6 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("#myForm");
     const newGameBtn = document.querySelector("#restartBtn");
     
+    const resetGameBtn = document.querySelector('#resetBtn');
+
+
+    newGameBtn.addEventListener('click', () => {
+        location.reload();
+    })
     
     
     form.addEventListener("submit", (event) => {
@@ -36,12 +42,24 @@ document.addEventListener("DOMContentLoaded", () => {
         data.currentPlayer = "X";
         data.gameOver = false;
     };
+
+    const resetDom = () => {
+        document.querySelectorAll(".box").forEach((box) => {
+            box.className = "box";
+            box.textContent = "";
+            });
+    };
     
     const addEventListenersToGameBoard = (data) => {
         document.querySelectorAll(".box").forEach((box) => {
             box.addEventListener("click", (event) => {
                 playMove(event.target, data);
             });
+        });
+        resetGameBtn.addEventListener("click", () => {
+            InitializeVariables(data);
+            resetDom();
+            adjustDom("displayTurn", `${data.player1Name}'s turn`);
         });
     }
     
@@ -53,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
         // Add event listeners to the gameboard
         addEventListenersToGameBoard(data);
+        
     }
     
     const playMove = (box, data) => {
